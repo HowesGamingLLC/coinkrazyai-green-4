@@ -27,7 +27,7 @@ export default defineConfig(({ mode }) => ({
         },
         transform: {
           react: {
-            runtime: "classic",
+            runtime: "automatic",
           },
         },
       },
