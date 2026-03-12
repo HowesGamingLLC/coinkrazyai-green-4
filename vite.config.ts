@@ -1,6 +1,5 @@
 import { defineConfig, Plugin } from "vite";
-// Disabled react-swc plugin to use TypeScript JSX compilation instead
-// import react from "@vitejs/plugin-react-swc";
+import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { createServer } from "./server";
 import { setupSocketIO } from "./server/socket";
@@ -19,20 +18,12 @@ export default defineConfig(({ mode }) => ({
   build: {
     outDir: "dist/spa",
   },
-  plugins: [expressPlugin()],
-  esbuild: {
-    loader: "tsx",
-    include: /src\/.*\.tsx?$/,
-    exclude: [],
-  },
-  optimizeDeps: {
-    esbuildOptions: {
-      loader: {
-        ".ts": "tsx",
-        ".tsx": "tsx",
-      },
-    },
-  },
+  plugins: [
+    react({
+      jsxImportSource: "react",
+    }),
+    expressPlugin(),
+  ],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./client"),
