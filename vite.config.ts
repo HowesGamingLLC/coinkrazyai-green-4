@@ -20,7 +20,13 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react({
-      jsxImportSource: "react",
+      jsc: {
+        transform: {
+          react: {
+            runtime: "classic",
+          },
+        },
+      },
     }),
     expressPlugin(),
   ],
